@@ -28,7 +28,7 @@ public class Main {
             System.out.println(exc.getMessage());
         }
 
-        bedroom.sound("грр-пс-пс");
+        bedroom.sound("грр-пс-пс", 1);
         julius.sleep();
         glass.lay();
         kid.see(glass);
