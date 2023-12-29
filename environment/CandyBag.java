@@ -16,7 +16,7 @@ public class CandyBag extends Thing {
         this.size = size;
     }
 
-    public void fillUpWithCandies(Candy[] candies) {
+    public void fillUpWithCandies(Candy[] candies) throws CandiesOutOfCandyBagException {
         if (this.size >= 0) System.arraycopy(candies, 0, this.content, 0, this.size);
         if (candies.length > this.size) {
             StringBuilder message = new StringBuilder("Не влезли конфеты: ");
