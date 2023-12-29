@@ -17,9 +17,7 @@ public class CandyBag extends Thing {
     }
 
     public void fillUpWithCandies(Candy[] candies) {
-        for (int i = 0; i < this.size; i++) {
-            this.content[i] = candies[i];
-        }
+        if (this.size >= 0) System.arraycopy(candies, 0, this.content, 0, this.size);
         if (candies.length > this.size) {
             StringBuilder message = new StringBuilder("Не влезли конфеты: ");
             for (int i = this.size; i < candies.length; i++) {
@@ -36,10 +34,10 @@ public class CandyBag extends Thing {
         return takenCandy;
     }
 
-    public void putCandy(Candy candy) throws CandiesOutOfCandyBagException{
+    public void putCandy(Candy candy) throws CandiesOutOfCandyBagException {
         boolean wasNotPut = true;
         for (int i = 0; i < this.content.length; i++) {
-            if (this.content[i] == null){
+            if (this.content[i] == null) {
                 this.content[i] = candy;
                 wasNotPut = false;
                 break;
@@ -70,6 +68,9 @@ public class CandyBag extends Thing {
 
     @Override
     public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
         if (this.hashCode() != obj.hashCode() || !(obj instanceof CandyBag candybag)) {
             return false;
         }

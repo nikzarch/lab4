@@ -8,12 +8,12 @@ public class Main {
         Julius julius = new Julius();
         Kid kid = new Kid();
         Environment bedroom = new Environment("Спальня");
-        Thing.Container glass = new Thing.Container("Стакан с водой", bedroom){
+        Thing.Container glass = new Thing.Container("Стакан с водой", bedroom) {
             @Override
-            public void lay(){
+            public void lay() {
                 if (this.place == null) {
                     System.out.println(this.getName() + " стоит ");
-                }else{
+                } else {
                     System.out.println(this.getName() + " стоит в " + this.place.getName());
                 }
             }
@@ -24,7 +24,7 @@ public class Main {
         CandyBag candyBag = new CandyBag("Кулёк с карамельками", 2, bedroom);
         try {
             candyBag.fillUpWithCandies(bag);
-        }catch (CandiesOutOfCandyBagException exc) {
+        } catch (CandiesOutOfCandyBagException exc) {
             System.out.println(exc.getMessage());
         }
 
@@ -37,7 +37,7 @@ public class Main {
         glasses.lay();
         candyBag.lay();
         kid.see(candyBag);
-        System.out.println(candyBag.toString());
+        System.out.println(candyBag);
         kid.take(candyBag, "чтобы отдать Карлсону");
         kid.take(candyBag.takeCandy(0)); // карман будет занят
         kid.feel(Feeling.SOMETHING_SHOULD_BE_HERE);

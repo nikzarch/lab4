@@ -10,7 +10,7 @@ import interfaces.Takeable;
 import java.util.Objects;
 
 public final class Kid extends Person implements Seeable, Takeable, CanPut {
-    private Thing.Container pocket;
+    private final Thing.Container pocket;
     private Essence observed;
     private Feeling lastFeeling;
 
@@ -72,10 +72,11 @@ public final class Kid extends Person implements Seeable, Takeable, CanPut {
         return this.pocket;
     }
 
-    public void feel(Feeling feeling){
+    public void feel(Feeling feeling) {
         lastFeeling = feeling;
         System.out.println(this.name + feeling.toString());
     }
+
     @Override
     public int hashCode() {
         return super.hashCode() + this.name.hashCode();
@@ -83,13 +84,15 @@ public final class Kid extends Person implements Seeable, Takeable, CanPut {
 
     @Override
     public boolean equals(Object obj) {
-        if (this.hashCode() != obj.hashCode() || !(obj instanceof Kid)) {
+        if (obj == null) {
+            return false;
+        }
+        if (this.hashCode() != obj.hashCode() || !(obj instanceof Kid kid)) {
             return false;
         }
         if (this == obj) {
             return true;
         }
-        Kid kid = (Kid) obj;
         return Objects.equals(this.name, kid.getName()) && Objects.equals(this.pocket.getContent(), kid.pocket.getContent()) && Objects.equals(this.cond, kid.getPocket());
     }
 

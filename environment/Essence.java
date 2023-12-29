@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public abstract class Essence {
     protected String name;
+
     public Essence(String name) {
         this.name = name;
     }
@@ -15,13 +16,15 @@ public abstract class Essence {
 
     @Override
     public boolean equals(Object obj) {
-        if (this.hashCode() != obj.hashCode() || !(obj instanceof Essence)) {
+        if (obj == null) {
+            return false;
+        }
+        if (this.hashCode() != obj.hashCode() || !(obj instanceof Essence essence)) {
             return false;
         }
         if (this == obj) {
             return true;
         }
-        Essence essence = (Essence) obj;
         return Objects.equals(this.name, essence.getName());
     }
 

@@ -39,16 +39,15 @@ public class Person extends Essence implements Sleepable {
 
     @Override
     public boolean equals(Object obj) {
-		if (obj == null){
-			return false;
-		}
-        if (this.hashCode() != obj.hashCode() || !(obj instanceof Person)){
+        if (obj == null) {
             return false;
         }
-        if (this == obj){
+        if (this.hashCode() != obj.hashCode() || !(obj instanceof Person person)) {
+            return false;
+        }
+        if (this == obj) {
             return true;
         }
-        Person person = (Person) obj;
         return this.name == person.getName();
     }
 }

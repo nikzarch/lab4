@@ -3,40 +3,27 @@ package environment;
 import java.util.Objects;
 
 public class Environment {
-    private String name;
+    private final String name;
     private DayTime daytime;
     private Sound lastsound;
 
     {
-        lastsound = new Sound("Тишина",0);
+        lastsound = new Sound("Тишина", 0);
         daytime = DayTime.MORNING;
-        System.out.println(daytime.toString());
+        System.out.println(daytime);
     }
 
     public Environment(String name) {
         this.name = name;
     }
-    private class Sound{
-        private String name;
-        private int volume;
 
-        private Sound(String name, int volume){
-            this.name = name;
-            this.volume = volume;
-        }
-
-        @Override
-        public String toString(){
-            return "звук " + this.name + " громкостью " + this.volume;
-        }
-    }
     public void changeTime() {
         if (this.daytime == DayTime.MORNING) {
             this.daytime = DayTime.EVENING;
         } else {
             this.daytime = DayTime.MORNING;
         }
-        System.out.println(daytime.toString());
+        System.out.println(daytime);
     }
 
     public void sound(String sound, int volume) {
@@ -64,13 +51,30 @@ public class Environment {
 
     @Override
     public boolean equals(Object obj) {
-        if (this.hashCode() != obj.hashCode() || !(obj instanceof Environment)) {
+        if (obj == null) {
+            return false;
+        }
+        if (this.hashCode() != obj.hashCode() || !(obj instanceof Environment environment)) {
             return false;
         }
         if (this == obj) {
             return true;
         }
-        Environment environment = (Environment) obj;
         return Objects.equals(this.name, environment.getName()) && Objects.equals(this.lastsound, environment.getLastSound());
+    }
+
+    private class Sound {
+        private final String name;
+        private final int volume;
+
+        private Sound(String name, int volume) {
+            this.name = name;
+            this.volume = volume;
+        }
+
+        @Override
+        public String toString() {
+            return "звук " + this.name + " громкостью " + this.volume;
+        }
     }
 }
