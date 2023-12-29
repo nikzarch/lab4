@@ -4,52 +4,48 @@ import java.util.Objects;
 
 public class Environment {
     private String name;
-    private DayTime daytime = DayTime.MORNING;
-    private String lastsound;
+    private DayTime daytime;
+    private Sound lastsound;
 
     {
+        lastsound = new Sound("Тишина",0);
+        daytime = DayTime.MORNING;
         System.out.println(daytime.toString());
     }
 
     public Environment(String name) {
         this.name = name;
     }
+    private class Sound{
+        private String name;
+        private int volume;
 
-    private enum DayTime {
-
-        MORNING("Начинало светать"),
-        EVENING("Начинало темнеть");
-
-        private final String name;
-
-        DayTime(String name) {
+        private Sound(String name, int volume){
             this.name = name;
+            this.volume = volume;
         }
 
         @Override
-        public String toString() {
-            return this.name;
+        public String toString(){
+            return "звук " + this.name + " громкостью " + this.volume;
         }
-
     }
-
     public void changeTime() {
         if (this.daytime == DayTime.MORNING) {
             this.daytime = DayTime.EVENING;
-            System.out.println(daytime.toString());
         } else {
             this.daytime = DayTime.MORNING;
-            System.out.println(daytime.toString());
         }
+        System.out.println(daytime.toString());
     }
 
-    public void sound(String sound) {
+    public void sound(String sound, int volume) {
+        this.lastsound = new Sound(sound, volume);
         System.out.println("В " + this.name + " звучал " + sound);
-        this.lastsound = sound;
     }
 
     public String getLastSound() {
-        return this.lastsound;
+        return this.lastsound.toString();
     }
 
     public String getName() {
